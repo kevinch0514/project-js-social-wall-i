@@ -17,8 +17,27 @@
     <button type="submit">Post Message</button>
   </form>
 
+{{!-- <form method="post" enctype="multipart/form-data" action="/messages">
+  <div>
+    <label for="image">Choose image to upload</label>
+    <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
+  </div>
+  <div>
+    <button>Submit</button>
+  </div>
+</form> --}}
+{{!-- order_direction={{toggle orderDirection 'ASC' 'DESC'--}}
+
   <div id="messages">
-    <h2>Messages</h2>
+    <form action="/messages">
+      <label for="orderDirection">Sort Posts By:</label>
+      <select name="orderDirection" id="orderDirection">
+        <option value="ASC">Oldest</option>
+        <option value="DESC">Newest</option>
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+
 
     {{#unless messages}}
       <p>Sorry, no messages. :(</p>

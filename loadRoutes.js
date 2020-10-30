@@ -10,7 +10,9 @@ function loadRoutes(knex) {
 
   // GET /
   router.get('/', async(request, response) => {
-    let messages = await knex('messages').select('*').orderBy('created_at', 'DESC');
+    let orderDirection = request.query.order_direction || 'ASC';
+    // let messages = await knex('messages').select('*').orderBy('created_at', 'DESC');
+    let messages = await knex('messages').select('*').orderBy('created_at', orderDirection);
     let viewName = 'index';
     let viewData = { messages: messages };
 
