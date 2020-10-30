@@ -21,17 +21,16 @@ function loadRoutes(knex) {
 
   // POST /messages
   router.post('/messages', async(request, response) => {
-    let messageBody = request.body.body;
-    let messageTime = new Date();
+    let orderDirection = request.body.orderDirection;
+    let messages = await knex('messages').select('*').orderBy('created_at', orderDirection);
+    console.log(request.body);
+    console.log(request.body.orderDirection);
+    console.log(orderDirection);
 
-    let messageData = {
-      body: messageBody,
-      created_at: messageTime,
-    };
+    let viewName = 'index';
+    let viewData = { messages: messages };
 
-    // There is no error handling here.
-    await knex('messages').insert(messageData);
-    response.redirect('/');
+    response.render(viewName, viewData);
   });
 
   return router;
